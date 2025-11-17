@@ -14,31 +14,17 @@ neighbour matching on the scores.  Finally it computes an average treatment
 effect on the matched sample.
 """
 
+import sys
+from pathlib import Path
+
+# Add parent directory to path to import data module
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import NearestNeighbors
-
-def generate_data(n: int = 500, seed: int = 0):
-    """
-    Generate synthetic data for PSM.
-
-    Returns
-    -------
-    data : pd.DataFrame
-        DataFrame with columns ['x1', 'x2', 'treatment', 'outcome'].
-    """
-    rng = np.random.default_rng(seed)
-    x1 = rng.normal(size=n)
-    x2 = rng.normal(size=n)
-    # probability of treatment depends on x1 and x2
-    logits = 0.5 * x1 - 0.3 * x2
-    prop = 1 / (1 + np.exp(-logits))
-    treatment = rng.binomial(1, prop)
-    # outcome depends on x1, x2 and treatment effect of +2
-    outcome = 1 + 2 * treatment + 0.5 * x1 - 0.2 * x2 + rng.normal(scale=1.0, size=n)
-    data = pd.DataFrame({'x1': x1, 'x2': x2, 'treatment': treatment, 'outcome': outcome})
-    return data
+from data import generate_psm_data
 
 def estimate_propensity(data: pd.DataFrame):
     """
@@ -76,7 +62,7 @@ def match_and_estimate_ate(data: pd.DataFrame, prop_scores: np.ndarray):
     return ate
 
 if __name__ == "__main__":
-    data = generate_data()
+    data = generate_psm_data()
     prop_scores = estimate_propensity(data)
     ate = match_and_estimate_ate(data, prop_scores)
     print(f"Estimated ATE (PSM): {ate:.3f}")

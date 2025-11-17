@@ -13,33 +13,16 @@ treatment indicator and trains logistic regression models separately on the
 treated and control subsets.  The predicted uplift is computed for each sample.
 """
 
+import sys
+from pathlib import Path
+
+# Add parent directory to path to import data module
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
-
-def generate_uplift_data(n: int = 1000, seed: int = 42):
-    """
-    Generate synthetic data for uplift modelling.
-
-    Returns
-    -------
-    df : pd.DataFrame
-        DataFrame with columns ['x1','x2','treatment','y'].
-    """
-    rng = np.random.default_rng(seed)
-    x1 = rng.standard_normal(n)
-    x2 = rng.standard_normal(n)
-    # treatment assignment with some dependence on x1
-    treat_prop = 1 / (1 + np.exp(-0.5 * x1))
-    treatment = rng.binomial(1, treat_prop)
-    # outcome probabilities differ by treatment and covariates
-    base = -0.5 + 0.5 * x1 + 0.3 * x2
-    uplift_effect = 0.8  # treatment effect on log‑odds
-    logits = base + uplift_effect * treatment
-    prob = 1 / (1 + np.exp(-logits))
-    y = rng.binomial(1, prob)
-    df = pd.DataFrame({'x1': x1, 'x2': x2, 'treatment': treatment, 'y': y})
-    return df
+from data import generate_uplift_data
 
 def train_two_models(df: pd.DataFrame):
     """

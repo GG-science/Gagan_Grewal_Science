@@ -1,0 +1,12 @@
+numpy>=1.21.0
+pandas>=1.3.0
+scikit-learn>=1.0.0
+matplotlib>=3.5.0
+seaborn>=0.12.0
+# Optional dependencies:
+# boto3>=1.26.0  # For S3 data loading (install with: pip install boto3)
+# FAISS installation depends on your platform:
+# For Linux/Windows: pip install faiss-cpu>=1.7.0
+# For macOS: pip install faiss>=1.7.0
+# The faiss_example.py script will handle missing FAISS gracefully
+

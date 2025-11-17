@@ -12,11 +12,17 @@ a synthetic binary classification problem and prints the accuracy on a hold‑ou
 test set.
 """
 
+import sys
+from pathlib import Path
+
+# Add parent directory to path to import data module
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 import numpy as np
-from sklearn.datasets import make_classification
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from data import generate_classification_data
 
 def train_gbdt(n_samples: int = 1000, seed: int = 0):
     """
@@ -31,11 +37,7 @@ def train_gbdt(n_samples: int = 1000, seed: int = 0):
     y_test : np.ndarray
         Test labels.
     """
-    X, y = make_classification(n_samples=n_samples,
-                               n_features=10,
-                               n_informative=5,
-                               n_redundant=2,
-                               random_state=seed)
+    X, y = generate_classification_data(n_samples=n_samples, seed=seed)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=seed)
     model = GradientBoostingClassifier()
     model.fit(X_train, y_train)
