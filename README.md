@@ -1,4 +1,4 @@
-# Gagan Grewal Science
+# Practical ML Models
 
 A practical repository for **causal inference**, **uplift modeling**, and **similarity search** with ready-to-use examples, evaluation tools, and visualizations.
 
@@ -6,8 +6,8 @@ A practical repository for **causal inference**, **uplift modeling**, and **simi
 
 ```bash
 # 1. Clone and setup
-git clone https://github.com/GG-science/Gagan_Grewal_Science.git
-cd Gagan_Grewal_Science
+git clone https://github.com/GG-science/practical_ml_models.git
+cd practical_ml_models
 pip install -r requirements.txt
 
 # 2. Run your first example
@@ -106,7 +106,7 @@ python evaluation/model_evaluation.py
 ## Repository Structure
 
 ```
-Gagan_Grewal_Science/
+practical_ml_models/
 ├── data/              # Data loading (local files, S3, synthetic data)
 ├── matching/          # PSM and FAISS similarity search
 ├── uplift_modeling/   # Two-model and S-learner approaches

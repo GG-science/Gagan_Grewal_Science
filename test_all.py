@@ -160,7 +160,7 @@ def test_evaluation():
 def main():
     """Run all tests."""
     print("="*60)
-    print("Testing Gagan Grewal Science Repository")
+    print("Testing Practical ML Models Repository")
     print("="*60)
     
     tests = [

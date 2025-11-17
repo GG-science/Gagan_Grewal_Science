@@ -1,5 +1,5 @@
 """
-Setup script for Gagan Grewal Science repository.
+Setup script for Practical ML Models repository.
 """
 
 from setuptools import setup, find_packages
@@ -11,7 +11,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
     requirements = [line.strip() for line in fh if line.strip() and not line.startswith("#")]
 
 setup(
-    name="gagan-grewal-science",
+    name="practical-ml-models",
     version="0.1.0",
     author="Gagan Grewal",
     description="A collection of Python scripts demonstrating machine learning and causal inference techniques",
